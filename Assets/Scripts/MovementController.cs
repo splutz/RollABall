@@ -16,10 +16,15 @@ public class MovementController : NetworkBehaviour {
 			return;
 		}
 
+		var rb = GetComponent<Rigidbody> ();
+
 		var x = Input.GetAxis ("Horizontal") * Time.deltaTime * 5.0f;
 		var z = Input.GetAxis ("Vertical") * Time.deltaTime * 5.0f;
 
-		transform.Translate (new Vector3(x, 0.0f, z));
+		rb.AddForce (new Vector3 (x, 0.0f, z) * 50.0f);
 
+		if (Input.GetKeyDown ("space")) {
+			rb.AddForce (Vector3.up * 200.0f);
+		}
 	}
 }
